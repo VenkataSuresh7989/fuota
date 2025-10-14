@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-import socket
-import webbrowser
+import os
+import threading
+import time
+import requests
 
 app = Flask(__name__)
 
@@ -76,14 +78,32 @@ def get_details():
     })
 
 # ----------------------------
-# Main Runner (Local Network)
+# Keep-Alive Thread (Prevents Render Sleep)
+# ----------------------------
+def keep_alive():
+    """Periodically ping the app to keep it alive on Render."""
+    render_url = os.getenv("RENDER_EXTERNAL_URL")
+    if not render_url:
+        return  # Only run on Render
+
+    while True:
+        try:
+            requests.get(render_url, timeout=5)
+            print("🔁 Keep-alive ping sent.")
+        except Exception as e:
+            print(f"⚠️ Keep-alive failed: {e}")
+        time.sleep(300)  # Ping every 5 minutes
+
+# ----------------------------
+# Main Runner (Local or Render)
 # ----------------------------
 if __name__ == '__main__':
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-    port = 5000
-    url = f"http://{local_ip}:{port}"
+    port = int(os.environ.get("PORT", 5000))
+    host = "0.0.0.0"
 
-    print(f"\n✅ App running at: {url}")
-    webbrowser.open(url)
-    app.run(host=local_ip, port=port, debug=True)
+    # Start keep-alive thread if on Render
+    if os.getenv("RENDER"):
+        threading.Thread(target=keep_alive, daemon=True).start()
+
+    print(f"✅ Server running at http://localhost:{port}")
+    app.run(host=host, port=port, debug=False)

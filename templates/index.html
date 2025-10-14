@@ -84,9 +84,6 @@
       .container {
         padding: 20px;
       }
-      button {
-        font-size: 15px;
-      }
     }
   </style>
 </head>
@@ -122,20 +119,24 @@
 
       document.getElementById("output").innerHTML = `<p>Processing...</p>`;
 
-      const res = await fetch("/get_details", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ device_type: deviceType, rx: rx })
-      });
+      try {
+        const res = await fetch("/get_details", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ device_type: deviceType, rx })
+        });
 
-      const data = await res.json();
+        const data = await res.json();
 
-      document.getElementById("output").innerHTML = `
-        <p><strong>Status:</strong> ${data.Status}</p>
-        <p><strong>Device Status:</strong> ${data["Device Status"]}</p>
-        <p><strong>Device Status Message:</strong> ${data["Device Status Message"]}</p>
-        <p><strong>Device Percentage:</strong> ${data["Device Percentage"]}</p>
-      `;
+        document.getElementById("output").innerHTML = `
+          <p><strong>Status:</strong> ${data.Status}</p>
+          <p><strong>Device Status:</strong> ${data["Device Status"]}</p>
+          <p><strong>Device Status Message:</strong> ${data["Device Status Message"]}</p>
+          <p><strong>Device Percentage:</strong> ${data["Device Percentage"]}</p>
+        `;
+      } catch (err) {
+        document.getElementById("output").innerHTML = `<p style="color:red;">Server not responding. Try again later.</p>`;
+      }
     }
   </script>
 </body>
