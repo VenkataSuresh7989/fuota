@@ -22,7 +22,7 @@
       border-radius: 15px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       width: 95%;
-      max-width: 600px;
+      max-width: 650px;
       text-align: center;
     }
 
@@ -38,7 +38,7 @@
       text-align: left;
     }
 
-    select, input {
+    select, input, textarea {
       width: 100%;
       padding: 10px;
       border: 1px solid #ccc;
@@ -48,7 +48,7 @@
     }
 
     button {
-      margin-top: 20px;
+      margin-top: 15px;
       width: 100%;
       padding: 12px;
       font-size: 16px;
@@ -75,15 +75,51 @@
       word-wrap: break-word;
     }
 
-    .output p {
-      margin: 6px 0;
-      font-size: 15px;
+    .split-container {
+      margin-top: 30px;
+      padding: 15px;
+      background: #f7faff;
+      border: 1px solid #d9e3ff;
+      border-radius: 10px;
+    }
+
+    .split-output {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 10px;
+      background: #eef2ff;
+      border-radius: 10px;
+    }
+
+    .split-box {
+      background: #fff;
+      border: 2px solid #cfd8ff;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .split-box span.index {
+      display: block;
+      font-size: 12px;
+      color: #2b3a67;
+      font-weight: bold;
+    }
+
+    .split-box span.value {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      margin-top: 5px;
     }
 
     @media (max-width: 600px) {
-      .container {
-        padding: 20px;
-      }
+      .container { padding: 20px; }
     }
   </style>
 </head>
@@ -104,6 +140,17 @@
 
     <div class="output" id="output">
       <p><em>Result will appear here...</em></p>
+    </div>
+
+    <!-- 🔹 Split Data Section -->
+    <div class="split-container">
+      <h3>🧩 Split Data</h3>
+      <textarea id="splitInput" rows="4" placeholder="Paste data to split here..."></textarea>
+      <button onclick="splitData()">Split Data</button>
+
+      <div id="splitOutput" class="split-output">
+        <p><em>Split results will appear here...</em></p>
+      </div>
     </div>
   </div>
 
@@ -137,6 +184,30 @@
       } catch (err) {
         document.getElementById("output").innerHTML = `<p style="color:red;">Server not responding. Try again later.</p>`;
       }
+    }
+
+    function splitData() {
+      const input = document.getElementById("splitInput").value.trim().replace(/\s+/g, '');
+      const outputDiv = document.getElementById("splitOutput");
+
+      if (!input) {
+        outputDiv.innerHTML = `<p style="color:red;">Please enter data to split.</p>`;
+        return;
+      }
+
+      const parts = input.match(/.{1,2}/g) || [];
+
+      let html = "";
+      parts.forEach((val, idx) => {
+        html += `
+          <div class="split-box">
+            <span class="index">#${idx}</span>
+            <span class="value">${val}</span>
+          </div>
+        `;
+      });
+
+      outputDiv.innerHTML = html || "<p>No data found.</p>";
     }
   </script>
 </body>

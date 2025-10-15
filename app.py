@@ -77,14 +77,29 @@ def get_details():
         "Status": status
     })
 
+
+@app.route('/split_data', methods=['POST'])
+def split_data():
+    """Split the given hex string into 2-character groups with indexes."""
+    data = request.get_json()
+    hex_string = data.get("hex_string", "").strip()
+
+    if not hex_string:
+        return jsonify({"error": "No input provided"}), 400
+
+    clean_hex = hex_string.replace(" ", "").upper()
+    split_list = [clean_hex[i:i + 2] for i in range(0, len(clean_hex), 2)]
+    indexed_data = [{"index": i, "value": val} for i, val in enumerate(split_list)]
+
+    return jsonify(indexed_data)
+
 # ----------------------------
-# Keep-Alive Thread (Prevents Render Sleep)
+# Keep-Alive Thread (Render)
 # ----------------------------
 def keep_alive():
-    """Periodically ping the app to keep it alive on Render."""
     render_url = os.getenv("RENDER_EXTERNAL_URL")
     if not render_url:
-        return  # Only run on Render
+        return
 
     while True:
         try:
@@ -92,16 +107,15 @@ def keep_alive():
             print("🔁 Keep-alive ping sent.")
         except Exception as e:
             print(f"⚠️ Keep-alive failed: {e}")
-        time.sleep(300)  # Ping every 5 minutes
+        time.sleep(300)
 
 # ----------------------------
-# Main Runner (Local or Render)
+# Main Runner
 # ----------------------------
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     host = "0.0.0.0"
 
-    # Start keep-alive thread if on Render
     if os.getenv("RENDER"):
         threading.Thread(target=keep_alive, daemon=True).start()
 
