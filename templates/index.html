@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Device Status Checker</title>
   <style>
@@ -22,7 +22,7 @@
       border-radius: 15px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       width: 95%;
-      max-width: 650px;
+      max-width: 700px;
       text-align: center;
     }
 
@@ -61,9 +61,7 @@
       transition: 0.3s;
     }
 
-    button:hover {
-      background: #4359a0;
-    }
+    button:hover { background: #4359a0; }
 
     .output {
       margin-top: 25px;
@@ -118,6 +116,43 @@
       margin-top: 5px;
     }
 
+    /* Reboot & Status section */
+    .panel {
+      margin-top: 30px;
+      background: #f9fbff;
+      border: 1px solid #cfd8ff;
+      border-radius: 10px;
+      padding: 15px;
+      position: relative;
+      text-align: left;
+      font-family: monospace;
+      font-size: 14px;
+      word-break: break-all;
+    }
+
+    .panel h3 {
+      margin-top: 0;
+      color: #2b3a67;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #2b3a67;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: #4359a0;
+    }
+
     @media (max-width: 600px) {
       .container { padding: 20px; }
     }
@@ -151,6 +186,21 @@
       <div id="splitOutput" class="split-output">
         <p><em>Split results will appear here...</em></p>
       </div>
+    </div>
+
+    <!-- 🔹 Reboot and Status Messages -->
+    <div class="panel" id="rebootPanel">
+      <h3>Reboot:</h3>
+      <p id="rebootText">
+        000070110a0000040515000000010100000000000000000000000000000000200000000000000000000000000000000001030000000000000000000000000000
+      </p>
+    </div>
+
+    <div class="panel" id="statusPanel">
+      <h3>Status:</h3>
+      <p id="statusText">
+        000070110a0000040515000000010000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000
+      </p>
     </div>
   </div>
 

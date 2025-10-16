@@ -80,7 +80,6 @@ def get_details():
 
 @app.route('/split_data', methods=['POST'])
 def split_data():
-    """Split the given hex string into 2-character groups with indexes."""
     data = request.get_json()
     hex_string = data.get("hex_string", "").strip()
 
