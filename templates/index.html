@@ -15,7 +15,6 @@
       margin: 0;
       color: #333;
     }
-
     .container {
       background: #fff;
       padding: 30px 40px;
@@ -25,19 +24,13 @@
       max-width: 700px;
       text-align: center;
     }
-
-    h2 {
-      margin-bottom: 20px;
-      color: #2b3a67;
-    }
-
+    h2 { margin-bottom: 20px; color: #2b3a67; }
     label {
       display: block;
       margin: 10px 0 5px;
       font-weight: 600;
       text-align: left;
     }
-
     select, input, textarea {
       width: 100%;
       padding: 10px;
@@ -46,7 +39,6 @@
       font-size: 16px;
       box-sizing: border-box;
     }
-
     button {
       margin-top: 15px;
       width: 100%;
@@ -60,9 +52,7 @@
       cursor: pointer;
       transition: 0.3s;
     }
-
     button:hover { background: #4359a0; }
-
     .output {
       margin-top: 25px;
       background: #f1f4ff;
@@ -72,7 +62,6 @@
       text-align: left;
       word-wrap: break-word;
     }
-
     .split-container {
       margin-top: 30px;
       padding: 15px;
@@ -80,7 +69,6 @@
       border: 1px solid #d9e3ff;
       border-radius: 10px;
     }
-
     .split-output {
       margin-top: 20px;
       display: grid;
@@ -92,7 +80,6 @@
       background: #eef2ff;
       border-radius: 10px;
     }
-
     .split-box {
       background: #fff;
       border: 2px solid #cfd8ff;
@@ -101,22 +88,8 @@
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    .split-box span.index {
-      display: block;
-      font-size: 12px;
-      color: #2b3a67;
-      font-weight: bold;
-    }
-
-    .split-box span.value {
-      display: block;
-      font-size: 16px;
-      color: #333;
-      margin-top: 5px;
-    }
-
-    /* Reboot & Status section */
+    .split-box span.index { display: block; font-size: 12px; color: #2b3a67; font-weight: bold; }
+    .split-box span.value { display: block; font-size: 16px; color: #333; margin-top: 5px; }
     .panel {
       margin-top: 30px;
       background: #f9fbff;
@@ -129,30 +102,7 @@
       font-size: 14px;
       word-break: break-all;
     }
-
-    .panel h3 {
-      margin-top: 0;
-      color: #2b3a67;
-    }
-
-    .copy-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: #2b3a67;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 4px 8px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .copy-btn:hover {
-      background: #4359a0;
-    }
-
+    .panel h3 { margin-top: 0; color: #2b3a67; }
     @media (max-width: 600px) {
       .container { padding: 20px; }
     }
@@ -177,30 +127,13 @@
       <p><em>Result will appear here...</em></p>
     </div>
 
-    <!-- 🔹 Split Data Section -->
     <div class="split-container">
       <h3>🧩 Split Data</h3>
       <textarea id="splitInput" rows="4" placeholder="Paste data to split here..."></textarea>
       <button onclick="splitData()">Split Data</button>
-
       <div id="splitOutput" class="split-output">
         <p><em>Split results will appear here...</em></p>
       </div>
-    </div>
-
-    <!-- 🔹 Reboot and Status Messages -->
-    <div class="panel" id="rebootPanel">
-      <h3>Reboot:</h3>
-      <p id="rebootText">
-        000070110a0000040515000000010100000000000000000000000000000000200000000000000000000000000000000001030000000000000000000000000000
-      </p>
-    </div>
-
-    <div class="panel" id="statusPanel">
-      <h3>Status:</h3>
-      <p id="statusText">
-        000070110a0000040515000000010000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000
-      </p>
     </div>
   </div>
 
@@ -230,6 +163,7 @@
           <p><strong>Device Status:</strong> ${data["Device Status"]}</p>
           <p><strong>Device Status Message:</strong> ${data["Device Status Message"]}</p>
           <p><strong>Device Percentage:</strong> ${data["Device Percentage"]}</p>
+          <p><strong>Firmware Version:</strong> ${data["Firmware Version"]}</p>
         `;
       } catch (err) {
         document.getElementById("output").innerHTML = `<p style="color:red;">Server not responding. Try again later.</p>`;

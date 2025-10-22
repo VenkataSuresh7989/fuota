@@ -37,6 +37,21 @@ def extractInt(response, startIdx, endIdx):
     except ValueError:
         return 0
 
+# 🔹 SW Version Conversion
+def swVersionConversion(hexVal, isReverse=False):
+    try:
+        preHex = hexVal[:2]
+        nexHex = hexVal[2:]
+        val1 = int(preHex, 16) if preHex else 0
+        val2 = int(nexHex, 16) if nexHex else 0
+        data = f"{val2}.{val1}" if isReverse else f"{val1}.{val2}"
+        if data == "0.0":
+            data = "--.--"
+        return data
+    except Exception as e:
+        print("Error during SW version conversion:", e)
+        return hexVal
+
 # ----------------------------
 # Routes
 # ----------------------------
@@ -55,13 +70,27 @@ def get_details():
     devStatusMsg = getXPRProgressMsg(devStatus)
     status = ""
 
+    # 🔹 Firmware version logic
+    typeRanges = {
+        "128": {"start": 57, "end": 58},
+        "129": {"start": 60, "end": 61}
+    }
+    fw_version = "--.--"
+    if device_type in typeRanges and len(response) > typeRanges[device_type]["end"] * 2:
+        bytes_list = [response[i:i+2] for i in range(0, len(response), 2)]
+        range_ = typeRanges[device_type]
+        slice_ = bytes_list[range_["start"]:range_["end"] + 1]
+        if len(slice_) == 2:
+            joined = slice_[0] + slice_[1]
+            fw_version = swVersionConversion(joined, isReverse=False)
+
+    # 🔹 Device status logic
     if device_type == "129":  # Amplifier
         if devStatus == "06":
             dStatus = extractInt(response, 86, 88)
             status = hexaToBinary(hex(dStatus)[2:]) if dStatus != 0 else getXPRProgressMsg(devStatus)
         else:
             status = getXPRProgressMsg(devStatus)
-
     elif device_type == "128":  # Transponder
         if devStatus == "02":
             status = f"{getXPRProgressMsg(devStatus)} : {devPercent}%"
@@ -74,23 +103,9 @@ def get_details():
         "Device Status": devStatus,
         "Device Status Message": devStatusMsg,
         "Device Percentage": f"{devPercent}%",
+        "Firmware Version": fw_version,
         "Status": status
     })
-
-
-@app.route('/split_data', methods=['POST'])
-def split_data():
-    data = request.get_json()
-    hex_string = data.get("hex_string", "").strip()
-
-    if not hex_string:
-        return jsonify({"error": "No input provided"}), 400
-
-    clean_hex = hex_string.replace(" ", "").upper()
-    split_list = [clean_hex[i:i + 2] for i in range(0, len(clean_hex), 2)]
-    indexed_data = [{"index": i, "value": val} for i, val in enumerate(split_list)]
-
-    return jsonify(indexed_data)
 
 # ----------------------------
 # Keep-Alive Thread (Render)
@@ -99,7 +114,6 @@ def keep_alive():
     render_url = os.getenv("RENDER_EXTERNAL_URL")
     if not render_url:
         return
-
     while True:
         try:
             requests.get(render_url, timeout=5)
@@ -114,9 +128,7 @@ def keep_alive():
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     host = "0.0.0.0"
-
     if os.getenv("RENDER"):
         threading.Thread(target=keep_alive, daemon=True).start()
-
     print(f"✅ Server running at http://localhost:{port}")
     app.run(host=host, port=port, debug=False)
