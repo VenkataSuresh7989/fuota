@@ -1,0 +1,287 @@
+/* ================================
+   🌐 Device Status Checker Styles
+   ================================ */
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(135deg, #e9f0ff, #f8faff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  color: #333;
+}
+
+/* 🔹 Main Container */
+.container {
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 95%;
+  max-width: 700px;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+
+/* 🔹 Headings */
+h2 {
+  margin-bottom: 20px;
+  color: #2b3a67;
+}
+
+h3 {
+  color: #2b3a67;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 1px;
+  margin: 0 0 15px;
+}
+
+/* 🔹 Module ID Section */
+.module-section {
+  background: #f7faff;
+  border: 1px solid #d9e3ff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.module-label {
+  font-weight: bold;
+  color: #2b3a67;
+  text-align: right;
+}
+
+.module-value {
+  font-family: "Courier New", monospace;
+  background: #eef2ff;
+  border: 1px solid #cfd8ff;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: #333;
+  text-align: left;
+}
+
+/* 🔹 Input Fields */
+label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 600;
+  text-align: left;
+  color: #2b3a67;
+}
+
+select,
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: #4359a0;
+  box-shadow: 0 0 5px rgba(67, 89, 160, 0.2);
+}
+
+/* 🔹 Buttons */
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #2b3a67;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease-in-out;
+}
+
+button:hover {
+  background: #4359a0;
+  transform: scale(1.02);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* 🔹 Output Display */
+.output {
+  margin-top: 25px;
+  background: #f1f4ff;
+  border: 1px solid #cfd8ff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: left;
+  word-wrap: break-word;
+  animation: fadeIn 0.4s ease;
+}
+
+.output p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+/* 🔹 Split Data Section */
+.split-container {
+  margin-top: 30px;
+  padding: 15px;
+  background: #f7faff;
+  border: 1px solid #d9e3ff;
+  border-radius: 10px;
+  text-align: left;
+}
+
+.split-container h3 {
+  margin-bottom: 15px;
+}
+
+.split-output {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #eef2ff;
+  border-radius: 10px;
+}
+
+.split-box {
+  background: #fff;
+  border: 2px solid #cfd8ff;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.split-box:hover {
+  transform: scale(1.05);
+}
+
+.split-box span.index {
+  display: block;
+  font-size: 12px;
+  color: #2b3a67;
+  font-weight: bold;
+}
+
+.split-box span.value {
+  display: block;
+  font-size: 16px;
+  color: #333;
+  margin-top: 5px;
+}
+
+/* 🔹 Scrollbar Styling */
+.split-output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.split-output::-webkit-scrollbar-thumb {
+  background-color: #cfd8ff;
+  border-radius: 4px;
+}
+
+.split-output::-webkit-scrollbar-thumb:hover {
+  background-color: #aab4f5;
+}
+
+/* 🔹 Button Group (Side by Side Layout) */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  flex-wrap: wrap; /* ensures responsive stacking */
+}
+
+.button-group button {
+  flex: 1 1 48%; /* ensures both buttons share space equally */
+  margin-top: 0; /* remove extra top margin */
+}
+
+/* 🔹 Reset Button Styling (same theme colors) */
+button.reset {
+  background: #d9e3ff;
+  color: #2b3a67;
+  font-weight: 600;
+  border: 1px solid #cfd8ff;
+}
+
+button.reset:hover {
+  background: #aab4f5;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+button.reset:active {
+  transform: scale(0.98);
+}
+
+/* 🔹 Responsive Adjustments */
+@media (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .button-group button {
+    flex: 1 1 100%;
+  }
+}
+
+
+/* 🔹 Responsive Design */
+@media (max-width: 600px) {
+  .container {
+    padding: 20px;
+  }
+  .module-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  button {
+    font-size: 15px;
+  }
+  .split-output {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+}
+
+/* 🔹 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
