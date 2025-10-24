@@ -154,8 +154,9 @@ button:active {
   text-align: left;
 }
 
-.split-container h3 {
+.split-container h2 {
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .split-output {
