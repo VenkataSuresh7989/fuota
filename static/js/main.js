@@ -85,3 +85,41 @@ async function loadMappings() {
 }
 
 loadMappings();
+
+
+function validateInteger(input) {
+  input.value = input.value.replace(/[^0-9]/g, ''); // allow only integers
+}
+
+function calculateLoopback() {
+  const deviceCount = parseInt(document.getElementById("deviceCount").value) || 0;
+  const count = parseInt(document.getElementById("count").value) || 0;
+  const times = parseInt(document.getElementById("times").value) || 0;
+
+  const output = document.getElementById("loopbackResult");
+
+  if (deviceCount === 0 || count === 0 || times === 0) {
+    output.innerHTML = `<p class="split-error">Please enter all values (only integers allowed).</p>`;
+    return;
+  }
+
+  // Formula: (DeviceCount * 2 * Times) + ((DeviceCount * Count) * Times)
+  const finalCount = (deviceCount * 2 * times) + ((deviceCount * count) * times);
+
+  output.innerHTML = `
+    <div class="result-box">
+      <p><strong>Device Count:</strong> ${deviceCount}</p>
+      <p><strong>Count:</strong> ${count}</p>
+      <p><strong>No. of Times:</strong> ${times}</p>
+      <h4>🔢 Final Result: <span class="final-count">${finalCount}</span></h4>
+    </div>
+  `;
+}
+
+function resetLoopback() {
+  document.getElementById("deviceCount").value = "";
+  document.getElementById("count").value = "";
+  document.getElementById("times").value = "";
+  document.getElementById("loopbackResult").innerHTML = `<p><em>Result will appear here...</em></p>`;
+}
+

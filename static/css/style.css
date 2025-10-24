@@ -208,6 +208,53 @@ button.reset:hover {
   background: #eef2ff;
 }
 
+
+/* Loopback Section */
+.loopback-inputs {
+  margin-top: 15px;
+}
+
+.loopback-inputs label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: 600;
+  color: #2b3a67;
+}
+
+.loopback-inputs input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.result-box {
+  background: #eef2ff;
+  border: 1px solid #cfd8ff;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  text-align: left;
+}
+
+.result-box h4 {
+  color: #2b3a67;
+  margin-top: 10px;
+}
+
+.final-count {
+  color: #4359a0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.split-error {
+  color: red;
+  margin-top: 10px;
+}
+
 /* Status Mappings Container */
 .mappings-container {
   margin-top: 30px;
@@ -222,6 +269,7 @@ button.reset:hover {
   flex: 1;
   min-width: 280px;
 }
+
 .mapping-section h4{ text-align: center; margin-bottom: 10px; margin-top: 0;}
 @media (max-width: 600px) {
   .container {

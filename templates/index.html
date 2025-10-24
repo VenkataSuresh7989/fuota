@@ -89,6 +89,35 @@
         <p><em>Split results will appear here...</em></p>
       </div>
     </div>
+
+    <!-- Loopback -->
+    <div class="split-container">
+      <h3>🧩 Loopback</h3>
+
+      <div class="formula">
+        <p><em>(No. of Device Count × 2 × No. of Times) + ((No. of Device Count × Count) × No. of Times)</em></p>
+      </div>
+
+      <div class="loopback-inputs">
+        <label>Device Count</label>
+        <input type="number" id="deviceCount" min="0" oninput="validateInteger(this)" placeholder="Enter Device Count">
+
+        <label>Count</label>
+        <input type="number" id="count" min="0" oninput="validateInteger(this)" placeholder="Enter Count">
+
+        <label>No. of Times</label>
+        <input type="number" id="times" min="0" oninput="validateInteger(this)" placeholder="Enter No. of Times">
+
+        <div class="button-group">
+          <button onclick="calculateLoopback()">Calculate</button>
+          <button class="reset" onclick="resetLoopback()">Reset</button>
+        </div>
+
+        <div id="loopbackResult" class="output">
+          <p><em>Result will appear here...</em></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
