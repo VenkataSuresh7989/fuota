@@ -1,3 +1,6 @@
+// ----------------------------
+// Get Details
+// ----------------------------
 async function getDetails() {
   const deviceType = document.getElementById("deviceType").value;
   const rx = document.getElementById("rxInput").value.trim();
@@ -17,7 +20,6 @@ async function getDetails() {
     });
 
     const data = await res.json();
-
     document.getElementById("output").innerHTML = `
       <p><strong>Status:</strong> ${data.Status}</p>
       <p><strong>Device Status:</strong> ${data["Device Status"]}</p>
@@ -30,6 +32,9 @@ async function getDetails() {
   }
 }
 
+// ----------------------------
+// Split Data
+// ----------------------------
 function splitData() {
   const input = document.getElementById("splitInput").value.trim().replace(/\s+/g, '');
   const outputDiv = document.getElementById("splitOutput");
@@ -40,21 +45,17 @@ function splitData() {
   }
 
   const parts = input.match(/.{1,2}/g) || [];
-
-  let html = "";
-  parts.forEach((val, idx) => {
-    html += `
-      <div class="split-box">
-        <span class="index">#${idx}</span>
-        <span class="value">${val}</span>
-      </div>
-    `;
-  });
-
-  outputDiv.innerHTML = html || "<p>No data found.</p>";
+  outputDiv.innerHTML = parts.map((val, idx) => `
+    <div class="split-box">
+      <span class="index">#${idx}</span>
+      <span class="value">${val}</span>
+    </div>
+  `).join("");
 }
 
-/* 🔹 Reset Functions */
+// ----------------------------
+// Reset Functions
+// ----------------------------
 function resetDetails() {
   document.getElementById("rxInput").value = "";
   document.getElementById("output").innerHTML = `<p><em>Result will appear here...</em></p>`;
@@ -64,3 +65,23 @@ function resetSplit() {
   document.getElementById("splitInput").value = "";
   document.getElementById("splitOutput").innerHTML = `<p><em>Split results will appear here...</em></p>`;
 }
+
+// ----------------------------
+// Load Status Options
+// ----------------------------
+async function loadMappings() {
+  try {
+    const res = await fetch("/status_options");
+    const data = await res.json();
+
+    document.getElementById("xprOptions").innerHTML = Object.entries(data["XPR Progress"])
+      .map(([k,v]) => `<tr><td><strong>${k}</strong></td> <td>${v}</td></tr>`).join("");
+
+    document.getElementById("hexOptions").innerHTML = Object.entries(data["Hex Binary"])
+      .map(([k,v]) => `<tr><td><strong>${k}</strong></td> <td>${v}</td></tr>`).join("");
+  } catch(err) {
+    console.error("Failed to load status mappings:", err);
+  }
+}
+
+loadMappings();

@@ -1,7 +1,4 @@
-/* ================================
-   🌐 Device Status Checker Styles
-   ================================ */
-
+/* General Styles */
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #e9f0ff, #f8faff);
@@ -13,24 +10,20 @@ body {
   color: #333;
 }
 
-/* 🔹 Main Container */
 .container {
   background: #fff;
   padding: 30px 40px;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 95%;
-  max-width: 700px;
+  max-width: 900px;
   text-align: center;
-  animation: fadeIn 0.6s ease;
 }
 
-/* 🔹 Headings */
 h2 {
   margin-bottom: 20px;
   color: #2b3a67;
 }
-
 h3 {
   color: #2b3a67;
   text-transform: uppercase;
@@ -39,42 +32,38 @@ h3 {
   margin: 0 0 15px;
 }
 
-/* 🔹 Module ID Section */
+/* Module Grid */
 .module-section {
-  background: #f7faff;
+  background: #f0f7ff;
   border: 1px solid #d9e3ff;
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 30px;
-  text-align: center;
+  margin-bottom: 30px;text-align: left;
 }
-
 .module-grid {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 10px 20px;
-  max-width: 400px;
+  gap: 10px 20px;  
   margin: 0 auto;
   text-align: left;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
 }
-
 .module-label {
   font-weight: bold;
   color: #2b3a67;
-  text-align: right;
+  text-align: left;
 }
-
 .module-value {
   font-family: "Courier New", monospace;
   background: #eef2ff;
   border: 1px solid #cfd8ff;
   border-radius: 8px;
   padding: 5px 10px;
-  color: #333;
-  text-align: left;
 }
 
-/* 🔹 Input Fields */
+/* Inputs & Buttons */
 label {
   display: block;
   margin: 10px 0 5px;
@@ -82,7 +71,6 @@ label {
   text-align: left;
   color: #2b3a67;
 }
-
 select,
 input,
 textarea {
@@ -93,9 +81,8 @@ textarea {
   font-size: 16px;
   box-sizing: border-box;
   outline: none;
-  transition: border 0.2s ease;
+  transition: border 0.2s;
 }
-
 select:focus,
 input:focus,
 textarea:focus {
@@ -103,7 +90,6 @@ textarea:focus {
   box-shadow: 0 0 5px rgba(67, 89, 160, 0.2);
 }
 
-/* 🔹 Buttons */
 button {
   margin-top: 15px;
   width: 100%;
@@ -115,19 +101,30 @@ button {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.1s ease-in-out;
+  transition: 0.3s;
 }
-
 button:hover {
   background: #4359a0;
-  transform: scale(1.02);
+}
+button.reset {
+  background: #ccc;
+  color: #222;
+}
+button.reset:hover {
+  background: #bbb;
 }
 
-button:active {
-  transform: scale(0.98);
+.button-group {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.button-group button {
+  flex: 1;
 }
 
-/* 🔹 Output Display */
+/* Output & Split */
 .output {
   margin-top: 25px;
   background: #f1f4ff;
@@ -136,15 +133,7 @@ button:active {
   padding: 15px;
   text-align: left;
   word-wrap: break-word;
-  animation: fadeIn 0.4s ease;
 }
-
-.output p {
-  margin: 6px 0;
-  line-height: 1.4;
-}
-
-/* 🔹 Split Data Section */
 .split-container {
   margin-top: 30px;
   padding: 15px;
@@ -153,12 +142,6 @@ button:active {
   border-radius: 10px;
   text-align: left;
 }
-
-.split-container h2 {
-  margin-bottom: 15px;
-  text-align: center;
-}
-
 .split-output {
   margin-top: 20px;
   display: grid;
@@ -170,7 +153,6 @@ button:active {
   background: #eef2ff;
   border-radius: 10px;
 }
-
 .split-box {
   background: #fff;
   border: 2px solid #cfd8ff;
@@ -178,20 +160,13 @@ button:active {
   padding: 10px;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
 }
-
-.split-box:hover {
-  transform: scale(1.05);
-}
-
 .split-box span.index {
   display: block;
   font-size: 12px;
   color: #2b3a67;
   font-weight: bold;
 }
-
 .split-box span.value {
   display: block;
   font-size: 16px;
@@ -199,90 +174,60 @@ button:active {
   margin-top: 5px;
 }
 
-/* 🔹 Scrollbar Styling */
-.split-output::-webkit-scrollbar {
-  width: 8px;
-}
-
-.split-output::-webkit-scrollbar-thumb {
-  background-color: #cfd8ff;
-  border-radius: 4px;
-}
-
-.split-output::-webkit-scrollbar-thumb:hover {
-  background-color: #aab4f5;
-}
-
-/* 🔹 Button Group (Side by Side Layout) */
-.button-group {
+/* Tables */
+.table-grid {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 15px;
-  flex-wrap: wrap; /* ensures responsive stacking */
+  gap: 20px;
+  flex-wrap: wrap;
 }
-
-.button-group button {
-  flex: 1 1 48%; /* ensures both buttons share space equally */
-  margin-top: 0; /* remove extra top margin */
+.status-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
-
-/* 🔹 Reset Button Styling (same theme colors) */
-button.reset {
-  background: #d9e3ff;
-  color: #2b3a67;
-  font-weight: 600;
-  border: 1px solid #cfd8ff;
-}
-
-button.reset:hover {
-  background: #aab4f5;
+.status-table th {
+  background: #2b3a67;
   color: #fff;
-  transform: scale(1.02);
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+.status-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: monospace;
+}
+.status-table tr:nth-child(even) {
+  background: #f8faff;
+}
+.status-table tr:hover {
+  background: #eef2ff;
 }
 
-button.reset:active {
-  transform: scale(0.98);
+/* Status Mappings Container */
+.mappings-container {
+  margin-top: 30px;
+  padding: 15px;
+  background: #f0f7ff;
+  border: 1px solid #cfd8ff;
+  border-radius: 12px;
+  text-align: left;
 }
 
-/* 🔹 Responsive Adjustments */
-@media (max-width: 600px) {
-  .button-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .button-group button {
-    flex: 1 1 100%;
-  }
+.mapping-section {
+  flex: 1;
+  min-width: 280px;
 }
-
-
-/* 🔹 Responsive Design */
+.mapping-section h4{ text-align: center; margin-bottom: 10px; margin-top: 0;}
 @media (max-width: 600px) {
   .container {
     padding: 20px;
   }
-  .module-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  button {
-    font-size: 15px;
-  }
-  .split-output {
-    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-  }
-}
-
-/* 🔹 Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .table-grid {
+    flex-direction: column;
   }
 }

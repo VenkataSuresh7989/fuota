@@ -1,22 +1,17 @@
+# app.py
 from flask import Flask, render_template
-from routes.device_routes import device_bp
-import threading
 import os
+import threading
 import time
 import requests
+from routes.device_routes import device_bp
 
 app = Flask(__name__)
-
-# Register Blueprints
 app.register_blueprint(device_bp)
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-# 🔹 Keep-Alive Thread (for Render hosting)
+# ----------------------------
+# Keep-Alive (Optional for Render)
+# ----------------------------
 def keep_alive():
     render_url = os.getenv("RENDER_EXTERNAL_URL")
     if not render_url:
@@ -29,7 +24,16 @@ def keep_alive():
             print(f"⚠️ Keep-alive failed: {e}")
         time.sleep(300)
 
+# ----------------------------
+# Main Route
+# ----------------------------
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+# ----------------------------
+# Main Runner
+# ----------------------------
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     host = "0.0.0.0"

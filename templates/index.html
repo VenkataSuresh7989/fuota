@@ -8,15 +8,50 @@
 </head>
 <body>
   <div class="container">
+    <!-- Module ID -->
     <div class="module-section">
-      <h3>📡Module ID</h3>
+      <h3>📡 Module ID</h3>
       <div class="module-grid">
-        <div class="module-label">XPR</div>
-        <div class="module-value">F3050404</div>
-        <div class="module-label">MB/BLE</div>
+        <div class="module-label">MB/BLE [0x43 || 67]</div>
         <div class="module-value">E9050210</div>
-        <div class="module-label">FMX</div>
+        <div class="module-label">XPR [0x45 || 69]</div>
+        <div class="module-value">F3050404</div>
+        <div class="module-label">FMX [0x46 || 70]</div>
         <div class="module-value">EE050409</div>
+      </div>
+    </div>
+
+    <!-- Status Mappings -->
+    <div class="mappings-container">
+      <h3>📜 Status Options</h3>
+      <div class="table-grid">
+        <!-- XPR Table -->
+        <div class="mapping-section">
+          <h4>XPR Upgrade Status</h4>
+          <table class="status-table" id="xprTable">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="xprOptions"></tbody>
+          </table>
+        </div>
+
+        <!-- Amplifier Table -->
+        <div class="mapping-section">
+          <h4>Amplifier Upgrade Status</h4>
+          <table class="status-table" id="hexTable">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="hexOptions"></tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -40,8 +75,9 @@
       <p><em>Result will appear here...</em></p>
     </div>
 
+    <!-- Split Data -->
     <div class="split-container">
-      <h2>🧩 Split Data</h2>
+      <h3>🧩 Split Data</h3>
       <textarea id="splitInput" rows="4" placeholder="Paste data to split here..."></textarea>
 
       <div class="button-group">

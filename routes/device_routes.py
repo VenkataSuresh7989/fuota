@@ -1,8 +1,8 @@
+# routes/device_routes.py
 from flask import Blueprint, request, jsonify
-from utils.helpers import getXPRProgressMsg, hexaToBinary, extractInt, swVersionConversion
+from utils.helpers import getXPRProgressMsg, hexaToBinary, extractInt, swVersionConversion, getStatusMappings
 
 device_bp = Blueprint("device_bp", __name__)
-
 
 @device_bp.route('/get_details', methods=['POST'])
 def get_details():
@@ -15,21 +15,17 @@ def get_details():
     devStatusMsg = getXPRProgressMsg(devStatus)
     status = ""
 
-    # 🔹 Firmware version logic
-    typeRanges = {
-        "128": {"start": 57, "end": 58},
-        "129": {"start": 60, "end": 61}
-    }
+    # Firmware version logic
+    typeRanges = {"128": {"start": 57, "end": 58}, "129": {"start": 60, "end": 61}}
     fw_version = "--.--"
     if device_type in typeRanges and len(response) > typeRanges[device_type]["end"] * 2:
         bytes_list = [response[i:i+2] for i in range(0, len(response), 2)]
-        range_ = typeRanges[device_type]
-        slice_ = bytes_list[range_["start"]:range_["end"] + 1]
-        if len(slice_) == 2:
-            joined = slice_[0] + slice_[1]
-            fw_version = swVersionConversion(joined, isReverse=False)
+        r = typeRanges[device_type]
+        s = bytes_list[r["start"]:r["end"] + 1]
+        if len(s) == 2:
+            fw_version = swVersionConversion(s[0] + s[1])
 
-    # 🔹 Device status logic
+    # Device status logic
     if device_type == "129":  # Amplifier
         if devStatus == "06":
             dStatus = extractInt(response, 86, 88)
@@ -51,3 +47,8 @@ def get_details():
         "Firmware Version": fw_version,
         "Status": status
     })
+
+# 🔹 API to send all status options to UI
+@device_bp.route('/status_options', methods=['GET'])
+def status_options():
+    return jsonify(getStatusMappings())
