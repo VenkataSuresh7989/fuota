@@ -153,6 +153,137 @@
         </div>
       </div>
     </div>
+
+    <!-- APK Build -->  
+    <div class="module-section">
+      <div>
+        <h3>📡 CMS UI</h3>
+        <div class="list_cmd">
+          <ul>
+            <li>
+              <strong>store.js</strong>
+              <ul>
+                <li>Uncomment <code>baseIp</code> and <code>axios</code> (e.g., line no: 10 & 11).</li>
+                <li>Comment the remaining <code>baseIp</code> configurations in the store.</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>package.json</strong>
+              <ul>
+                <li>Update the <strong>version number</strong>.</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Build Process (Terminal)</strong>
+              <ul>
+                <li>Press <code>Ctrl + C</code> → When prompted <em>"Terminate batch job (y/n)"</em>, press <strong>Y</strong>.</li>
+                <li>Run the command:
+                  <code>npm run build</code>
+                </li>
+                <li>The updated build will be generated automatically in the <code>dist</code> folder.</li>
+                <li>Navigate to <code>dist → index.html</code>.</li>
+                <li>The file will appear as a single line of code.</li>
+                <li>Go to <strong>Code</strong> (menu bar) → <strong>Reformat Code</strong> or press
+                  <code>Ctrl + Alt + L</code>.
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Static Folder Update</strong>
+              <ul>
+                <li>Go to the corresponding <code>dist</code> folder.</li>
+                <li>Copy the following files/folders:
+                  <code>css</code>, <code>fonts</code>, <code>img</code>, <code>js</code>, 
+                  <code>favicon</code>, <code>index.html</code>
+                </li>
+                <li>Remove existing files from the <code>static</code> folder.</li>
+                <li>Paste the copied <code>dist</code> files into the <code>static</code> folder.</li>
+                <li>Example path:
+                  <code>D:\Workstation\CMS Build Files\Opti-Trace Server Ver 23.03.03a\static</code>
+                </li>
+                <li>If any <strong>xml binding files</strong> are changed, copy them to the static folder as well.</li>
+                <li>If there are no XML changes, copying XML files is not required.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <h3>📡 CMS API</h3>
+        <div class="list_cmd">
+          <ul>
+            <li>
+              <strong>Version Update</strong>
+              <ul>
+                <li>Change the <strong>version number</strong> in <code>OptiSrvST.py</code>.</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Build Executable</strong>
+              <ul>
+                <li>Open Command Prompt and navigate to:
+                  <code>D:\Latest_GIT\Amplifier_API</code>
+                </li>
+                <li>Run the following command:
+                  <code>pyinstaller --icon=favicon.ico --noconsole --onefile OptiSrvST.py</code>
+                </li>
+                <li>This will create the <code>OptiSrvST</code> file inside the <code>dist</code> folder.</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Deploy Build</strong>
+              <ul>
+                <li>Copy the generated <code>OptiSrvST</code> file from the <code>dist</code> folder.</li>
+                <li>Paste it into the corresponding server folder.</li>
+                <li>Example path:
+                  <code>D:\Workstation\CMS Build Files\Opti-Trace Server Ver 23.03.03a</code>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div>
+        <h3>📡 Android</h3>
+        <div class="list_cmd">
+          <ul>
+            <li>ionic cap copy android (or) ionic capacitor sync android</li>
+            <li>ionic cap open android</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h3>📡 iOS</h3>
+        <div class="list_cmd">
+          <ul>
+            <li>sudo  ionic capacitor copy ios</li>
+            <li>sudo  ionic capacitor open ios</li>
+          </ul>
+        </div>
+
+        <h3>📡 Test flight setup</h3>
+        <div class="module-grid">
+          <div class="module-label">Step 1</div>
+          <div class="module-value">Goto the product-> archive</div>
+          <div class="module-label">Step 2</div>
+          <div class="module-value">Distribue app</div>
+          <div class="module-label">Step 3</div>
+          <div class="module-value">Testfilght internal only</div>
+          <div class="module-label">Step 4</div>
+          <div class="module-value">distribute</div>
+          <div class="module-label">Step 5</div>
+          <div class="module-value">done</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

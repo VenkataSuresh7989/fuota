@@ -270,6 +270,13 @@ button.reset:hover {
   min-width: 280px;
 }
 
+.list_cmd {
+  background: #FFF;
+  border-radius: 10px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 .mapping-section h4{ text-align: center; margin-bottom: 10px; margin-top: 0;}
 @media (max-width: 600px) {
   .container {
