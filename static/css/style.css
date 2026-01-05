@@ -207,7 +207,12 @@ button.reset:hover {
 .status-table tr:hover {
   background: #eef2ff;
 }
-
+/* Center table content */
+.status-table th,
+.status-table td {
+  text-align: center;
+  vertical-align: middle;
+}
 
 /* Loopback Section */
 .loopback-inputs {
