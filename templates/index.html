@@ -3,14 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Device Status Checker</title>
+  <title>Embed Technologies Development Tool</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
   <div class="container">
+
+    <!-- Company Header -->
+    <div style="text-align:center; margin-bottom:25px;">
+      <h1 style="margin:0; color:#2c3e50;">
+        🚀 Embed Technologies Development Tool
+      </h1>
+      <hr style="margin-top:15px;">
+    </div>
+    <!-- User Logins  -->
+    <div class="module-section">
+      <h3>🔐 User Logins</h3>
+
+      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+        <thead>
+          <tr>
+            <th>System</th>
+            <th>Username</th>
+            <th>Password</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Opti-Server -->
+          <tr>
+            <td rowspan="2">Opti-Server</td>
+            <td>admin</td>
+            <td>admin</td>
+          </tr>
+          <tr>
+            <td>devadmin</td>
+            <td>ATopt!s3</td>
+          </tr>
+
+          <!-- MSAM -->
+          <tr>
+            <td rowspan="2">MSAM</td>
+            <td>admin</td>
+            <td>admin</td>
+          </tr>
+          <tr>
+            <td>devadmin</td>
+            <td>ATlrd!s3</td>
+          </tr>
+
+          <!-- MSAM Wi-Fi -->
+          <tr>
+            <td>MSAM Wi-Fi</td>
+            <td>Wi-Fi Name</td>
+            <td>m@samdir@ct</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- VPN Configuration  -->
     <div class="module-section">
-      <h3>🌐 VPN Configuration </h3>
+      <h3>🛡️ VPN Configuration </h3>
       <div class="module-grid">
         <div class="module-label">Portal</div>
         <div class="module-value">ctec-vpn-test.charterlab.com</div>
@@ -23,7 +75,7 @@
 
      <!-- Keys -->
     <div class="module-section">
-      <h3>🖥️ Keys</h3>
+      <h3>🔑 Keys</h3>
       <div class="module-grid">
         <div class="module-label">name</div>
         <div class="module-value">Device Name</div>
@@ -44,7 +96,7 @@
 
     <!-- AWS External Join & FOUTA Server URLs -->
     <div class="module-section">
-      <h3>🖥️ AWS External Join & FOUTA Server URLs</h3>
+      <h3>☁️ AWS External Join & FOUTA Server URLs</h3>
       <div class="module-grid">
         <div class="module-label">Join Server</div>
         <div class="module-value">https://joinserver.embedtechnologies.com/joinreq</div>
@@ -57,7 +109,7 @@
 
     <!-- Charter External Join & FUOTA Server URLs -->
     <div class="module-section">
-      <h3>🖥️ Charter External Join & FUOTA Server URLs</h3>
+      <h3>🌐 Charter External Join & FUOTA Server URLs</h3>
       <div class="module-grid">
         <div class="module-label">Join Server</div>
         <div class="module-value">https://joinserver.caas.charterlab.com:443</div>
@@ -68,7 +120,7 @@
 
     <!-- Module ID -->
     <div class="module-section">
-      <h3>📡 Module ID</h3>
+      <h3>🆔 Module ID</h3>
       <div class="module-grid">
         <div class="module-label">MB/BLE [0x43 || 67]</div>
         <div class="module-value">E9050210</div>
@@ -85,7 +137,7 @@
 
     <!-- Wait Time -->
     <div class="module-section">
-      <h3>📡 Wait Time</h3>
+      <h3>⏱️ Wait Time</h3>
       <div class="module-grid">
         <div class="module-label">MSAM Status</div>
         <div class="module-value">60000 (60 Secs)</div>
@@ -127,7 +179,7 @@
       <div class="table-grid">
         <!-- XPR Table -->
         <div class="mapping-section">
-          <h4>Module Table</h4>
+          <h4>📡 Module Table</h4>
           <table class="status-table">
             <thead>
               <tr>
@@ -162,7 +214,7 @@
 
         <!-- Firmware Table -->
         <div class="mapping-section">
-          <h4>Firmware Table</h4>
+          <h4>📡 Firmware Table</h4>
           <table class="status-table">
             <thead>
               <tr>
@@ -199,7 +251,7 @@
       <div class="table-grid">
         <!-- XPR Table -->
         <div class="mapping-section">
-          <h4>XPR Upgrade Status</h4>
+          <h4>📡 XPR Upgrade Status</h4>
           <table class="status-table" id="xprTable">
             <thead>
               <tr>
@@ -213,7 +265,7 @@
 
         <!-- Amplifier Table -->
         <div class="mapping-section">
-          <h4>Amplifier Upgrade Status</h4>
+          <h4>📡 Amplifier Upgrade Status</h4>
           <table class="status-table" id="hexTable">
             <thead>
               <tr>
@@ -264,7 +316,7 @@
 
     <!-- Loopback -->
     <div class="split-container">
-      <h3>🧩 Loopback</h3>
+      <h3>🔁 Loopback</h3>
 
       <div class="formula">
         <p><em>(No. of Device Count × 2 × No. of Times) + ((No. of Device Count × Count) × No. of Times)</em></p>
@@ -291,10 +343,10 @@
       </div>
     </div>
 
-    <!-- APK Build -->  
+    <!-- APK Build -->
     <div class="module-section">
       <div>
-        <h3>📡 CMS UI</h3>
+        <h3>🖥️ CMS UI</h3>
         <div class="list_cmd">
           <ul>
             <li>
@@ -333,7 +385,7 @@
               <ul>
                 <li>Go to the corresponding <code>dist</code> folder.</li>
                 <li>Copy the following files/folders:
-                  <code>css</code>, <code>fonts</code>, <code>img</code>, <code>js</code>, 
+                  <code>css</code>, <code>fonts</code>, <code>img</code>, <code>js</code>,
                   <code>favicon</code>, <code>index.html</code>
                 </li>
                 <li>Remove existing files from the <code>static</code> folder.</li>
@@ -350,7 +402,7 @@
       </div>
 
       <div>
-        <h3>📡 CMS API</h3>
+        <h3>⚙️ CMS API</h3>
         <div class="list_cmd">
           <ul>
             <li>
@@ -389,7 +441,7 @@
 
 
       <div>
-        <h3>📡 Android</h3>
+        <h3>🤖 Android</h3>
         <div class="list_cmd">
           <ul>
             <li>ionic cap copy android (or) ionic capacitor sync android</li>
@@ -398,7 +450,7 @@
         </div>
       </div>
       <div>
-        <h3>📡 iOS</h3>
+        <h3>🍎 iOS</h3>
         <div class="list_cmd">
           <ul>
             <li>sudo  ionic capacitor copy ios</li>
@@ -406,7 +458,7 @@
           </ul>
         </div>
 
-        <h3>📡 Test flight setup</h3>
+        <h3>🧪 Test flight setup</h3>
         <div class="module-grid">
           <div class="module-label">Step 1</div>
           <div class="module-value">Goto the product-> archive</div>
