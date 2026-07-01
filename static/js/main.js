@@ -123,3 +123,242 @@ function resetLoopback() {
   document.getElementById("loopbackResult").innerHTML = `<p><em>Result will appear here...</em></p>`;
 }
 
+
+
+
+
+
+//====================================================
+// Arrays
+//====================================================
+
+let devEuiArr = [];
+let msgPayload = [];
+let fportArr = [];
+
+//====================================================
+// Add DevEUI
+//====================================================
+
+function addDevEUI() {
+
+    const value = document.getElementById("txtDevEUI").value.trim();
+
+    if (value === "") {
+        alert("Please enter DevEUI.");
+        document.getElementById("txtDevEUI").focus();
+        return;
+    }
+
+    if (devEuiArr.includes(value)) {
+        alert("DevEUI already exists.");
+        return;
+    }
+
+    devEuiArr.push(value);
+
+    document.getElementById("txtDevEUI").value = "";
+
+    refreshArrays();
+
+}
+
+//====================================================
+// Add Payload
+//====================================================
+
+function addPayload() {
+
+    const value = document.getElementById("txtPayload").value.trim();
+
+    if (value === "") {
+        alert("Please enter Payload.");
+        document.getElementById("txtPayload").focus();
+        return;
+    }
+
+    if (msgPayload.includes(value)) {
+        alert("Payload already exists.");
+        return;
+    }
+
+    msgPayload.push(value);
+
+    document.getElementById("txtPayload").value = "";
+
+    refreshArrays();
+
+}
+
+//====================================================
+// Add FPort
+//====================================================
+
+function addFport() {
+
+    const value = document.getElementById("txtFport").value.trim();
+
+    if (value === "") {
+        alert("Please enter FPort.");
+        document.getElementById("txtFport").focus();
+        return;
+    }
+
+    if (isNaN(value)) {
+        alert("FPort must be numeric.");
+        return;
+    }
+
+    if (fportArr.includes(value)) {
+        alert("FPort already exists.");
+        return;
+    }
+
+    fportArr.push(value);
+
+    document.getElementById("txtFport").value = "";
+
+    refreshArrays();
+
+}
+
+//====================================================
+// Refresh Dropdowns
+//====================================================
+
+function refreshArrays() {
+
+    fillSelect("devEuiSelect", devEuiArr);
+    fillSelect("payloadSelect", msgPayload);
+    fillSelect("fportSelect", fportArr);
+
+}
+
+//====================================================
+// Fill Dropdown
+//====================================================
+
+function fillSelect(id, array) {
+
+    const select = document.getElementById(id);
+
+    select.innerHTML = "";
+
+    // Default Option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.text = "-- Select --";
+    select.appendChild(defaultOption);
+
+    array.forEach(item => {
+
+        const option = document.createElement("option");
+
+        option.value = item;
+        option.text = item;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+//====================================================
+// Validate Form
+//====================================================
+
+function validateEnqueue() {
+
+    const baseURL = document.getElementById("serverIP").value.trim();
+    const dev_eui = document.getElementById("devEuiSelect").value;
+    const payload = document.getElementById("payloadSelect").value;
+    const fport = document.getElementById("fportSelect").value;
+
+    if (baseURL === "") {
+        alert("Server IP cannot be empty.");
+        document.getElementById("serverIP").focus();
+        return false;
+    }
+
+    if (devEuiArr.length === 0) {
+        alert("Please add at least one DevEUI.");
+        return false;
+    }
+
+    if (msgPayload.length === 0) {
+        alert("Please add at least one Payload.");
+        return false;
+    }
+
+    if (fportArr.length === 0) {
+        alert("Please add at least one FPort.");
+        return false;
+    }
+
+    if (dev_eui === "") {
+        alert("Please select DevEUI.");
+        document.getElementById("devEuiSelect").focus();
+        return false;
+    }
+
+    if (payload === "") {
+        alert("Please select Payload.");
+        document.getElementById("payloadSelect").focus();
+        return false;
+    }
+
+    if (fport === "") {
+        alert("Please select FPort.");
+        document.getElementById("fportSelect").focus();
+        return false;
+    }
+
+    return true;
+
+}
+
+//====================================================
+// Submit
+//====================================================
+
+function submitEnqueue() {
+
+    if (!validateEnqueue()) {
+        return;
+    }
+
+    const baseURL = document.getElementById("serverIP").value.trim();
+    const BEARER_TOKEN  = document.getElementById("loginToken").value.trim();
+    const dev_eui = document.getElementById("devEuiSelect").value;
+    const PAYLOAD = document.getElementById("payloadSelect").value;
+    const FPORT = document.getElementById("fportSelect").value;
+
+    const url =
+        `http://${baseURL}/enqueue?dev_eui=${encodeURIComponent(dev_eui)}&data=${encodeURIComponent(PAYLOAD)}&fport=${encodeURIComponent(FPORT)}`;
+
+    console.log(url);
+
+    alert("Generated URL:\n\n" + url);
+    fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${BEARER_TOKEN}`
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP Error: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        alert("Enqueue Successful");
+    })
+    .catch(error => {
+        console.error(error);
+        alert("Request Failed\n" + error.message);
+    });
+
+}

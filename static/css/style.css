@@ -182,6 +182,9 @@ button.reset:hover {
   gap: 20px;
   flex-wrap: wrap;
 }
+.table-grid.col-2 .module-section{
+    width:44%
+}
 .status-table {
   width: 100%;
   border-collapse: collapse;
@@ -304,3 +307,24 @@ button.reset:hover {
     flex-direction: column;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

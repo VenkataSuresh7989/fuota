@@ -16,7 +16,7 @@ def get_details():
     status = ""
 
     # Firmware version logic
-    typeRanges = {"128": {"start": 57, "end": 58}, "129": {"start": 60, "end": 61}}
+    typeRanges = {"128": {"start": 57, "end": 58}, "129": {"start": 60, "end": 61}, "130": {"start": 57, "end": 58}}
     fw_version = "--.--"
     if device_type in typeRanges and len(response) > typeRanges[device_type]["end"] * 2:
         bytes_list = [response[i:i+2] for i in range(0, len(response), 2)]
@@ -32,7 +32,8 @@ def get_details():
             status = hexaToBinary(hex(dStatus)[2:]) if dStatus != 0 else getXPRProgressMsg(devStatus)
         else:
             status = getXPRProgressMsg(devStatus)
-    elif device_type == "128":  # Transponder
+    # elif device_type == "128":  # Transponder
+    elif device_type in ["128", "130"]: # Transponder || # Transponder Loader
         if devStatus == "02":
             status = f"{getXPRProgressMsg(devStatus)} : {devPercent}%"
         elif devStatus != "00":
