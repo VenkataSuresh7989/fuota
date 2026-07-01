@@ -270,6 +270,7 @@ function fillSelect(id, array) {
 function validateEnqueue() {
 
     const baseURL = document.getElementById("serverIP").value.trim();
+    const BEARER_TOKEN  = document.getElementById("loginToken").value.trim();
     const dev_eui = document.getElementById("devEuiSelect").value;
     const payload = document.getElementById("payloadSelect").value;
     const fport = document.getElementById("fportSelect").value;
@@ -277,6 +278,12 @@ function validateEnqueue() {
     if (baseURL === "") {
         alert("Server IP cannot be empty.");
         document.getElementById("serverIP").focus();
+        return false;
+    }
+
+    if (BEARER_TOKEN === "") {
+        alert("Token cannot be empty.");
+        document.getElementById("loginToken").focus();
         return false;
     }
 
