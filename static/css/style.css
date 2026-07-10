@@ -16,8 +16,8 @@ body {
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   width: 95%;
-  max-width: 900px;
-  text-align: center;
+  max-width: 1200px;
+  text-align: center;.
 }
 
 h2 {
@@ -43,7 +43,7 @@ h3 {
 }
 .module-grid {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 300px 1fr;
   gap: 10px 20px;  
   margin: 0 auto;
   text-align: left;
@@ -173,6 +173,15 @@ button.reset:hover {
   font-size: 16px;
   color: #333;
   margin-top: 5px;
+}
+table{
+    table-layout: fixed;
+}
+table th, table tbody tr td{
+    padding:5px
+}
+table tbody tr td{
+    word-wrap: break-word;
 }
 
 /* Tables */

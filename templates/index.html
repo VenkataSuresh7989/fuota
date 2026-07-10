@@ -169,6 +169,25 @@
       </div>
     </div>
 
+    <!-- Common URLs -->
+    <div class="module-section">
+      <h3>☁️ Using URLs</h3>
+      <div class="module-grid">
+        <div class="module-label">Citrix</div>
+        <div class="module-value">http://vistancenetworks.cloud.com</div>
+        <div class="module-label">Sodiacs</div>
+        <div class="module-value">https://commscope.sodiacs.com</div>
+        <div class="module-label">CMS Setups</div>
+        <div class="module-value">https://docs.google.com/spreadsheets/d/1AumKfktL52vXJKlAUU_xb4PDrKV1KsHRU6BgsMSOF6M</div>
+        <div class="module-label">Firmwares</div>
+        <div class="module-value">https://drive.google.com/drive/u/0/folders/1oyYfZIxcHH5yKHwusvXiwfliMzr22Luy</div>
+        <div class="module-label">Join Server DevEUI List</div>
+        <div class="module-value">https://drive.google.com/file/d/1NbVrXxT0SHgwC8fQbH41iOPkgYg0f_1V</div>
+        <div class="module-label">External Join Server (Embed)</div>
+        <div class="module-value">https://joinserver.embedtechnologies.com/docs</div>
+      </div>
+    </div>
+
     <!-- AWS External Join & FOUTA Server URLs -->
     <div class="module-section">
       <h3>☁️ AWS External Join & FOUTA Server URLs</h3>
@@ -278,6 +297,8 @@
         <div class="module-value">Enter password: MightyMango</div>
         <div class="module-label">Step 6</div>
         <div class="module-value">ls || -h || exit</div>
+        <div class="module-label">Battery Stress</div>
+        <div class="module-value">stress-ng --cpu 4 --io 2 --vm 2 --vm-bytes 512M --timeout 59m</div>
       </div>
     </div>
 
@@ -330,9 +351,6 @@
         </div>
       </div>
     </div>
-
-
-
 <!-- ============================= -->
 <!-- Enqueue -->
 <!-- ============================= -->
@@ -340,6 +358,19 @@
 <!-- Version Table -->
 <div class="mappings-container">
   <h3>📜 Enqueue</h3>
+  <div class="mapping-section">
+    <h4>📋 Payload List</h4>
+    <table class="status-table" id="payloadTable">
+      <thead>
+        <tr>
+          <th>Payload Name</th>
+          <th>Payload Value</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
   <div class="table-grid col-2">
     <div class="module-section">
         <h3>📋 Array Management</h3>
@@ -349,8 +380,16 @@
         <button onclick="addDevEUI()">Add DevEUI</button>
         <br><br>
 
-        <label>Payload</label>
-        <input type="text" id="txtPayload" placeholder="Enter Payload">
+        <label>Payload Name</label>
+        <input type="text"
+               id="txtPayloadName"
+               placeholder="Enter Payload Name">
+
+        <label>Payload Value</label>
+        <input type="text"
+               id="txtPayloadValue"
+               placeholder="Enter Payload Value">
+
         <button onclick="addPayload()">Add Payload</button>
         <br><br>
 
@@ -384,9 +423,6 @@
     </div>
   </div>
 </div>
-
-
-
 
     <!-- Status Mappings -->
     <div class="mappings-container">

@@ -133,13 +133,22 @@ function resetLoopback() {
 //====================================================
 
 let devEuiArr = [];
-let msgPayload = [];
-let fportArr = [];
+let fixedMsgPayload = {
+    "7011 msg" : "000070110a0000040515000000010000020000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000",
+    "Package Ver": "00",
+    "Device F/W, H/W Ver": "01",
+    "Reboot": "0200000000",
+    "Reboot wait time(60 sec)": "033C0000",
+    "Get img version/status": "04",
+    "Delete upgraded img": "0500000000"
+};
+let msgPayload = {...fixedMsgPayload};
+let fportArr = [1,2,10,11,12,203];
 
 //====================================================
 // Add DevEUI
 //====================================================
-
+refreshArrays();
 function addDevEUI() {
 
     const value = document.getElementById("txtDevEUI").value.trim();
@@ -169,26 +178,34 @@ function addDevEUI() {
 
 function addPayload() {
 
-    const value = document.getElementById("txtPayload").value.trim();
+    const name = document.getElementById("txtPayloadName").value.trim();
+    const value = document.getElementById("txtPayloadValue").value.trim();
+
+    if (name === "") {
+        alert("Please enter Payload Name.");
+        document.getElementById("txtPayloadName").focus();
+        return;
+    }
 
     if (value === "") {
-        alert("Please enter Payload.");
-        document.getElementById("txtPayload").focus();
+        alert("Please enter Payload Value.");
+        document.getElementById("txtPayloadValue").focus();
         return;
     }
 
-    if (msgPayload.includes(value)) {
-        alert("Payload already exists.");
+    if (msgPayload[name]) {
+        alert("Payload Name already exists.");
         return;
     }
 
-    msgPayload.push(value);
+    msgPayload[name] = value;
 
-    document.getElementById("txtPayload").value = "";
+    document.getElementById("txtPayloadName").value = "";
+    document.getElementById("txtPayloadValue").value = "";
 
     refreshArrays();
-
 }
+
 
 //====================================================
 // Add FPort
@@ -227,10 +244,37 @@ function addFport() {
 //====================================================
 
 function refreshArrays() {
-
     fillSelect("devEuiSelect", devEuiArr);
-    fillSelect("payloadSelect", msgPayload);
+    fillPayloadSelect();
     fillSelect("fportSelect", fportArr);
+    refreshPayloadTable();
+}
+
+//====================================================
+// Fill Payload Dropdown
+//====================================================
+
+function fillPayloadSelect() {
+
+    const select = document.getElementById("payloadSelect");
+
+    select.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.text = "-- Select Payload --";
+    select.appendChild(defaultOption);
+
+    Object.keys(msgPayload).forEach(name => {
+
+        const option = document.createElement("option");
+
+        option.value = msgPayload[name];   // Actual payload
+        option.text = name;                // Display name
+
+        select.appendChild(option);
+
+    });
 
 }
 
@@ -292,7 +336,7 @@ function validateEnqueue() {
         return false;
     }
 
-    if (msgPayload.length === 0) {
+    if (Object.keys(msgPayload).length === 0) {
         alert("Please add at least one Payload.");
         return false;
     }
@@ -367,5 +411,29 @@ function submitEnqueue() {
         console.error(error);
         alert("Request Failed\n" + error.message);
     });
+
+}
+
+//====================================================
+// Refresh Payload Table
+//====================================================
+
+function refreshPayloadTable() {
+
+    const tbody = document.querySelector("#payloadTable tbody");
+
+    tbody.innerHTML = "";
+
+    for (const [name, value] of Object.entries(fixedMsgPayload)) {
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${name}</td>
+            <td>${value}</td>
+        `;
+
+        tbody.appendChild(row);
+    }
 
 }
